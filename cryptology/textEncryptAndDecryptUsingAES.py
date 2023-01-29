@@ -1,8 +1,3 @@
-import crypto
-import sys
-
-sys.modules['Crypto'] = crypto
-
 import base64  # Base64 인코딩, 디코딩
 from Crypto.Cipher import AES  #AES 암호화 모듈을 사용하기 위함
 from Crypto.Util.Padding import pad, unpad  # AES 사용시 패딩과 언패딩을 하기 위해..
