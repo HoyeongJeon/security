@@ -24,7 +24,6 @@ def get_decryption_key(key):
 # The adversary do somehting bad
 key = generate_key(3)
 message = input("What is your secret?")
-message = "I LOVE YOU"
 cipher = encrypt(key, message)
 
 dkey = get_decryption_key(key)
@@ -35,17 +34,10 @@ print("You are secret is \"{}\"".format(cipher))
 
 print("Decrypted secret is \"{}\"".format(plain))
 
-# You have to decrypt the secret!!! (Brute Force)
 """
+# How to attack the cipher?
 for i in range(26):
     dkey = generate_key(i)
     message = encrypt(dkey, cipher)
     print(message)
-"""
-"""
-The security of Caesar Cipher is based on the following.
-- By keeping the algorithm secret
-
-Why does Caesar Cipher give us one of the most valuable lessons in security?
-- Because security should not be based on keeping the algorithm secret.
 """
