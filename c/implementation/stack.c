@@ -21,6 +21,18 @@ typedef struct _node {
 Node *head = NULL;
 Node *tail = NULL;
 
+void find(int num) {
+	int i = 0; 
+	int count = 0;
+	for(i = 0; i < num; i++){
+		if(head == NULL && tail == NULL) {
+			printf("no nodes in this stack...\n");	
+			return ;
+		} 
+	
+	}
+}
+
 void size() {
   if (head == NULL && tail == NULL) {
     printf("0\n");
