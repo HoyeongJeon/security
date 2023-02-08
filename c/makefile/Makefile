@@ -1,11 +1,11 @@
-test : main.o sum.o sum2.o 
-	gcc -o test main.o sum.o sum2.o
+CC=gcc
+EXE=test
+OBJS=main.o sum.o sum2.o
+CFLAGS=-I./include
 
-main.o : main.c
-	gcc -c main.c
 
-sum.o : sum.c
-	gcc -c sum.c
+$(EXE) : $(OBJS) 
+	$(CC) $(CFLAGS) -o $@ $^
 
 clean : 
 	rm *.o
