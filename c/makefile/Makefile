@@ -1,11 +1,17 @@
 CC=gcc
-EXE=test
-OBJS=main.o sum.o sum2.o
-CFLAGS=-I./include
+EXE=run
+DEFINES=-DDEBUG
+LDFLAGS=-lpthread
+CFLAGS=-g -I./include $(DEFINES)
 
+C_SRC = $(wildcard *.c)
+OBJ = $(C_SRC: .c=.o)
 
-$(EXE) : $(OBJS) 
-	$(CC) $(CFLAGS) -o $@ $^
+all : $(EXE)
+	echo completed!
+
+$(EXE) : $(OBJ) 
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 clean : 
 	rm *.o

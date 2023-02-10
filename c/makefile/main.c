@@ -2,9 +2,13 @@
 #include "sum.h"
 
 int main() {
-	printf("Hello!\n");
 
+#ifdef DEBUG
+	printf("Debug!\n");
 	printf("sum : %d\n", sum(1,2));
-
+#else
+	printf("Hello!\n");
+	printf("sum : %d\n", sum(1,2));
+#endif
 	return 0;
 }
