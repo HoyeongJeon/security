@@ -1,4 +1,6 @@
 import operator
+import sys
+
 
 cipher = """lrvmnir bpr sumvbwvr jx bpr lmiwv yjeryrkbi jx qmbm wi
 bpr xjvni mkd ymibrut jx irhx wi bpr riirkvr jx
@@ -33,35 +35,58 @@ class Attack:
 
     def calculate_freq(self, cipher):
         for c in self.alphabet:
+            # Put all characters in alphabet into frequency object
             self.freq[c] = 0
 
         letter_count = 0
 
         for c in cipher:
-            if c in self.alphabet:
+            # if a character in cipher is in alphabet, plus freq[c] += 1 and total letter count + 1
+            if c in self.freq:
                 self.freq[c] += 1
                 letter_count += 1
 
         for c in self.freq:
+            # calculates the frequency of each characters from cipher.
             self.freq[c] = round(self.freq[c] / letter_count, 4)
 
     def print_freq(self):
         for c in self.freq:
             print(c, ':', self.freq[c])
 
-    def calulate_match(self):
-        map = {}
+    def calulate_matches(self):
         for cipher_char in self.alphabet:
+            map = {}
             for plain_char in self.alphabet:
                 map[plain_char] = round(
                     abs(self.freq[cipher_char] - self.freq_eng[plain_char]), 4)
                 self.mappings[cipher_char] = sorted(
                     map.items(), key=operator.itemgetter(1))
-                # sorted() -> list를 정렬한 뒤 새로운 list로 반환!!!, dict.items() -> key-value 쌍으로 return해줌!, key 요소는 정렬하는 기준이 됨!!!
+                # sorted() -> list를 정렬한 뒤 새로운 list로 반환, dict.items() -> key-value 쌍으로 return, key 요소는 정렬하는 기준.
                 # sorted(map.items(), key=operator.itemgetter(1)) -> map.items() = map dict를 key - value로 반환하는데 정렬의 기준이 operator.itemgetter(1), 즉, 2번째 요소인 value를 기준으로 정렬해라!
 
+    # key mapping function.
+    def set_key_mapping(self, cipher_char, plain_char):
+        if cipher_char not in self.cipher_chars_left or plain_char not in self.plain_chars_left:
+            print("ERROR: key mapping error", cipher_char, plain_char)
+            sys.exit(-1)
+        self.key[cipher_char] = plain_char
+        self.cipher_chars_left = self.cipher_chars_left.replace(
+            cipher_char, '')
+        self.plain_chars_left = self.plain_chars_left.replace(
+            plain_char, '')
+
     def guess_key(self):
-        key = {}
+        for cipher_char in self.cipher_chars_left:
+            for plain_char, diff in self.mappings[cipher_char]:
+                if plain_char in self.plain_chars_left:
+                    self.key[cipher_char] = plain_char
+                    self.plain_chars_left = self.plain_chars_left.replace(
+                        plain_char, '')
+                    break
+
+    def get_key(self):
+        return self.key
 
 
 def decrypt(key, cipher):
@@ -77,4 +102,33 @@ def decrypt(key, cipher):
 
 attack = Attack()
 attack.calculate_freq(cipher)
-attack.calculate_matches()
+attack.calulate_matches()
+
+attack.set_key_mapping('a', 'x')
+attack.set_key_mapping('d', 'd')
+attack.set_key_mapping('e', 'v')
+attack.set_key_mapping('m', 'a')
+attack.set_key_mapping('p', 'h')
+attack.set_key_mapping('q', 'k')
+attack.set_key_mapping('r', 'e')
+attack.set_key_mapping('s', 'p')
+attack.set_key_mapping('t', 'y')
+attack.set_key_mapping('u', 'r')
+attack.set_key_mapping('v', 'c')
+attack.set_key_mapping('w', 'i')
+attack.set_key_mapping('x', 'f')
+attack.set_key_mapping('y', 'm')
+attack.set_key_mapping('c', 'w')
+
+
+attack.guess_key()
+key = attack.get_key()
+
+message = decrypt(key, cipher)
+message_line = message.splitlines()
+cipher_line = cipher.splitlines()
+
+
+for i in range(len(cipher_line)):
+    print('P : ', message_line[i])
+    print('C : ', cipher_line[i])
