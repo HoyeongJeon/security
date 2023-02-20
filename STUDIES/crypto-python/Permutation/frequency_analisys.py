@@ -104,23 +104,6 @@ attack = Attack()
 attack.calculate_freq(cipher)
 attack.calulate_matches()
 
-attack.set_key_mapping('a', 'x')
-attack.set_key_mapping('d', 'd')
-attack.set_key_mapping('e', 'v')
-attack.set_key_mapping('m', 'a')
-attack.set_key_mapping('p', 'h')
-attack.set_key_mapping('q', 'k')
-attack.set_key_mapping('r', 'e')
-attack.set_key_mapping('s', 'p')
-attack.set_key_mapping('t', 'y')
-attack.set_key_mapping('u', 'r')
-attack.set_key_mapping('v', 'c')
-attack.set_key_mapping('w', 'i')
-attack.set_key_mapping('x', 'f')
-attack.set_key_mapping('y', 'm')
-attack.set_key_mapping('c', 'w')
-
-
 attack.guess_key()
 key = attack.get_key()
 
