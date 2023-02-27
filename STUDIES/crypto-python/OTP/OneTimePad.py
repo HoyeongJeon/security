@@ -10,17 +10,14 @@ def xor_bytes(key_stream, message):
     return bytes(key_stream[i] ^ message[i] for i in range(length))
 
 
-# this is done by your enemy
 message = "DO ATTACK"
 message = message.encode()
 key_stream = generate_key_stream(len(message))
 cipher = xor_bytes(key_stream, message)
 
 
-# this is us trying to break it
 message = "NO ATTACK"
 
-# insert the missing code here
 
 message = message.encode()
 guess_key_stream = xor_bytes(message, cipher)

@@ -35,19 +35,16 @@ class Attack:
 
     def calculate_freq(self, cipher):
         for c in self.alphabet:
-            # Put all characters in alphabet into frequency object
             self.freq[c] = 0
 
         letter_count = 0
 
         for c in cipher:
-            # if a character in cipher is in alphabet, plus freq[c] += 1 and total letter count + 1
             if c in self.freq:
                 self.freq[c] += 1
                 letter_count += 1
 
         for c in self.freq:
-            # calculates the frequency of each characters from cipher.
             self.freq[c] = round(self.freq[c] / letter_count, 4)
 
     def print_freq(self):
@@ -62,10 +59,7 @@ class Attack:
                     abs(self.freq[cipher_char] - self.freq_eng[plain_char]), 4)
                 self.mappings[cipher_char] = sorted(
                     map.items(), key=operator.itemgetter(1))
-                # sorted() -> list를 정렬한 뒤 새로운 list로 반환, dict.items() -> key-value 쌍으로 return, key 요소는 정렬하는 기준.
-                # sorted(map.items(), key=operator.itemgetter(1)) -> map.items() = map dict를 key - value로 반환하는데 정렬의 기준이 operator.itemgetter(1), 즉, 2번째 요소인 value를 기준으로 정렬해라!
 
-    # key mapping function.
     def set_key_mapping(self, cipher_char, plain_char):
         if cipher_char not in self.cipher_chars_left or plain_char not in self.plain_chars_left:
             print("ERROR: key mapping error", cipher_char, plain_char)

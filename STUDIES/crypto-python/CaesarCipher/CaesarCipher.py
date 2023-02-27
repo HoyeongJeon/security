@@ -7,6 +7,7 @@ def generate_key(n):
         cnt += 1
     return key
 
+
 def encrypt(key, message):
     cipher = ""
     for c in message:
@@ -16,12 +17,14 @@ def encrypt(key, message):
             cipher += c
     return cipher
 
+
 def get_decryption_key(key):
     dkey = {}
     for c in key:
         dkey[key[c]] = c
     return dkey
-# The adversary do somehting bad
+
+
 key = generate_key(3)
 message = input("What is your secret?")
 cipher = encrypt(key, message)
@@ -33,11 +36,3 @@ plain = encrypt(dkey, cipher)
 print("You are secret is \"{}\"".format(cipher))
 
 print("Decrypted secret is \"{}\"".format(plain))
-
-"""
-# How to attack the cipher?
-for i in range(26):
-    dkey = generate_key(i)
-    message = encrypt(dkey, cipher)
-    print(message)
-"""

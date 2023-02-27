@@ -1,4 +1,4 @@
-import random  # 실제 암호를 위해 사용하려면, random 모듈이 아닌 secret 모듈을 사용해야함.
+import random
 
 
 def generate_key():
@@ -7,7 +7,6 @@ def generate_key():
     key = {}
     for c in letters:
         random_num = random.randint(0, len(cletters) - 1)
-        # pop => return a element from the list and remove the element from the list
         key[c] = cletters.pop(random_num)
     return key
 
