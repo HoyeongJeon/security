@@ -1,8 +1,10 @@
+.gitignore
 /Prerequisite.py
 /test.py
-/StreamCipher/exp_MyStreamCipher.py
+/StreamCipher/ex_MyStreamCipher.py
 /Permutation/ex_extra_explanation.py
 /Permutation/ex_frequency_analisys.py
 /Permutation/ex_Permutation.py
 /OTP/ex_OneTimePad.py
 /CaesarCipher/ex_CaesarCipher.py
+/DES/ex_DESexample.py
