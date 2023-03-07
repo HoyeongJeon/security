@@ -1,0 +1,2 @@
+# HMAC
+> HMAC, or Keyed-Hash Message Authentication Code, is a type of cryptographic hash function that is used to verify the authenticity and integrity of a message or data transmitted over a network. It involves a combination of a secret key and a hash function to produce a message authentication code (MAC) that can be used to authenticate the message.
